@@ -26,29 +26,36 @@ class Ball{
   }
   
   void grow(){
-    System.out.println("growing");
+    if (state == 0){  
      r += 0.05; 
+    }
   }
   
   void collide(Ball[] balls){
     if(state == 0){
       for(Ball b: balls){
-        if(b.state == 1 && 
+        //check if ball isn't dead, radius > 0, balls touching, and ball
+        //isn't taking the distance to itself
+        if(b.state == 0 && 
            b.r > 0 &&
-           dist(b.x, b.y, x, y) < (b.r + r)){
+           dist(b.x, b.y, x, y) < (b.r + r) &&
+           dist(b.x,b.y,x,y) != 0) {
              state = 1;
+             b.state = 1;
            }
       }
     }
   }
   
   void still(){    
+    if (state == 1){
     r += dr; //updates 
     if(r > maxR) //decreasing size
       dr = -dr;
     if(r < 0){ //updates to nonexistence
       dr = 0;
       r = 0;
+    }
     }
   }
 
