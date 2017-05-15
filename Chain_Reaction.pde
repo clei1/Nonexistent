@@ -17,8 +17,7 @@ void draw(){
   
   for(Ball b : balls){
     if(mousePressed){
-      if((mouseX - b.x) < 2 &&
-         (mouseY - b.y) < 2){
+      if(dist(mouseX, mouseY, b.x, b.y) < 2){
            b.state = 1;
          }
     }
